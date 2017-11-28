@@ -9,11 +9,24 @@
 import UIKit
 
 class DetailViewController: UIViewController {
+    
+    @IBOutlet weak var avatarImageView: UIImageView!
+    @IBOutlet weak var authorLabel: UILabel!
+    @IBOutlet weak var descTextView: UITextView!
+    @IBOutlet weak var artImageView: UIImageView!
+    
+    var position:Int!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        let data = getData()
+        
+        self.authorLabel.text = data[position]["author"]
+        self.descTextView.text = data[position]["desc"]
+        self.avatarImageView.image = UIImage(named: data[position]["avatar"]!)
+        self.artImageView.image = UIImage(named: data[position]["image"]!)
     }
 
     override func didReceiveMemoryWarning() {
@@ -22,7 +35,17 @@ class DetailViewController: UIViewController {
     }
     
     @IBAction func backButtonDidPressed(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: nil)
+//        self.dismiss(animated: true, completion: nil)
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return UIStatusBarStyle.lightContent
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let homeVC = segue.destination as? HomeViewController {
+            homeVC.position = self.position
+        }
     }
     
     /*

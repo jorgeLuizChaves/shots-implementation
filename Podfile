@@ -6,7 +6,8 @@ target 'Shots-Implementing' do
   use_frameworks!
 
   # Pods for Shots-Implementing
-
+  use_frameworks!
+  pod 'Spring', :git => 'https://github.com/MengTo/Spring.git', :branch => 'swift4'
   target 'Shots-ImplementingTests' do
     inherit! :search_paths
     # Pods for testing
